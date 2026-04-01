@@ -147,10 +147,106 @@ h2 { margin-top: 60px; margin-bottom: 20px; font-size: 22px; color: #fff; positi
 }
 .skill-card i { color: #4facfe; font-size: 18px; }
 
-/* CONTACT */
-.contact-links { display: flex; flex-direction: column; gap: 15px; }
-.contact-links a { color: #aaa; text-decoration: none; transition: 0.3s; display: flex; align-items: center; gap: 10px; }
-.contact-links a:hover { color: #4facfe; }
+/* CONTACT CARD (Advanced Glassmorphism) */
+.contact-card {
+  background: rgba(255,255,255,0.03);
+  backdrop-filter: blur(10px);
+  padding: 30px;
+  margin-top: 20px;
+  border-radius: 18px;
+  border: 1px solid rgba(255,255,255,0.05);
+  position: relative; /* Needed for the glow */
+  overflow: hidden;    /* Clips the glow to the corners */
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeIn 0.6s ease forwards;
+}
+
+/* Glowing Border Effect for Contact Card */
+.contact-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 18px;
+  padding: 1.5px;
+  background: linear-gradient(120deg, #2563eb, #00f2fe);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  opacity: 0;
+  transition: 0.3s;
+  pointer-events: none; 
+}
+
+.contact-card:hover::before {
+  opacity: 1;
+}
+
+.contact-info {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-bottom: 30px;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  padding-bottom: 20px;
+}
+
+.contact-item {
+  color: #4facfe;
+  text-decoration: none;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: 0.3s;
+}
+
+.contact-item:hover { 
+  color: white; 
+  transform: scale(1.05); 
+}
+
+/* FORM STYLING */
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.contact-form input, 
+.contact-form textarea {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 10px;
+  padding: 12px 15px;
+  color: white;
+  font-family: inherit;
+  font-size: 14px;
+  transition: 0.3s;
+}
+
+.contact-form input:focus, 
+.contact-form textarea:focus {
+  outline: none;
+  border-color: #2563eb;
+  background: rgba(255,255,255,0.08);
+}
+
+.btn-send {
+  background: linear-gradient(90deg, #2563eb, #00c6ff);
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+  margin-top: 10px;
+}
+
+.btn-send:hover {
+  transform: scale(1.02);
+  box-shadow: 0 5px 15px rgba(37, 99, 235, 0.4);
+}
 
 /* FOOTER */
 footer { text-align: center; margin-top: 80px; padding-bottom: 40px; color: #444; font-size: 12px; }
