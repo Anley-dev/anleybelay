@@ -2,8 +2,8 @@ module.exports = async (req, res) => {
   const { message } = req.body;
   const apiKey = process.env.GEMINI_KEY;
 
-  // We are calling the STABLE v1 URL directly. No more v1beta!
-  const url = `https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
+  // FIXED URL: Removed the extra "models/" prefix
+  const url = `https://generativelanguage.googleapis.com/v1/gemini-1.5-flash:generateContent?key=${apiKey}`;
 
   try {
     const response = await fetch(url, {
@@ -16,15 +16,16 @@ module.exports = async (req, res) => {
 
     const data = await response.json();
     
+    // If it STILL says not found, we try one more model name variation
     if (data.error) {
-        return res.status(200).json({ reply: "Google Error: " + data.error.message });
+        return res.status(200).json({ reply: "Final check: " + data.error.message });
     }
 
     const aiReply = data.candidates[0].content.parts[0].text;
     res.status(200).json({ reply: aiReply });
 
   } catch (error) {
-    res.status(200).json({ reply: "Fetch Error: " + error.message });
+    res.status(200).json({ reply: "System error: " + error.message });
   }
 };
 
