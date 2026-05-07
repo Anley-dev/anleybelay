@@ -1,6 +1,6 @@
 {
-  "name": "anley-portfolio",
-  "version": "2.0.0",
+  "name": "anley-portfolio-v3",
+  "version": "3.0.0",
   "dependencies": {
     "@google/generative-ai": "0.21.0"
   }
