@@ -1,0 +1,30 @@
+module.exports = async (req, res) => {
+  const { message } = req.body;
+  const apiKey = process.env.GEMINI_KEY;
+
+  // We are calling the STABLE v1 URL directly. No more v1beta!
+  const url = `https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
+
+  try {
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        contents: [{ parts: [{ text: `You are Anley's Portfolio AI. User: ${message}` }] }]
+      })
+    });
+
+    const data = await response.json();
+    
+    if (data.error) {
+        return res.status(200).json({ reply: "Google Error: " + data.error.message });
+    }
+
+    const aiReply = data.candidates[0].content.parts[0].text;
+    res.status(200).json({ reply: aiReply });
+
+  } catch (error) {
+    res.status(200).json({ reply: "Fetch Error: " + error.message });
+  }
+};
+
