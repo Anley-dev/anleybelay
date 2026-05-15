@@ -298,12 +298,14 @@ footer { text-align: center; margin-top: 80px; padding-bottom: 40px; color: #444
 }
 
 .support-card {
+    margin-top: 40px;
+    margin-bottom: 50px;
     border: 1px solid #1a1a1a;
     background: #050505;
     padding: 25px;
     border-radius: 12px;
-    margin-bottom: 50px;
 }
+
 
 .order-info-box {
     background: #111;
